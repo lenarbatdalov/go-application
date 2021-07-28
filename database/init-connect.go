@@ -1,8 +1,8 @@
 package database
 
 import (
-	"github.com/lenarbatdalov/go-application/app/commands"
-	"github.com/lenarbatdalov/go-application/database/entities"
+	"github.com/lenarbatdalov/go-application/cmd"
+	"github.com/lenarbatdalov/go-application/entities"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )
@@ -22,7 +22,7 @@ func InitConnect() *gorm.DB {
 }
 
 func runCommand() {
-	commands.DefineDatabase()
+	cmd.DefineDatabase()
 }
 
 func migration(db *gorm.DB) {

@@ -1,14 +1,17 @@
 package main
 
 import (
-	"github.com/lenarbatdalov/go-application/app/controllers"
+	"github.com/lenarbatdalov/go-application/service"
 )
 
 var (
 	// db = database.InitConnect()
-	s = controllers.Server()
+	s = service.Server()
 )
 
 func main() {
-	s.Run(":8080")
+	err := s.Run(":8080")
+	if err != nil {
+		panic("server not started")
+	}
 }

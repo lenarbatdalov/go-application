@@ -1,4 +1,4 @@
-package controllers
+package service
 
 import (
 	"github.com/gin-contrib/sessions"
@@ -6,15 +6,8 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func generateToken() string {
-	// сгенерировать токен
-	// положить токен в файл конфига
-	// вернуть токен для подписи сессии
-	return "secret"
-}
-
 func Server() *gin.Engine {
-	sessionSecretKey := generateToken()
+	sessionSecretKey := "secret"
 
 	server := gin.New()
 
