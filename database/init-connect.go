@@ -2,7 +2,7 @@ package database
 
 import (
 	"github.com/lenarbatdalov/go-application/cmd"
-	"github.com/lenarbatdalov/go-application/entities"
+	"github.com/lenarbatdalov/go-application/entity"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )
@@ -26,9 +26,9 @@ func runCommand() {
 }
 
 func migration(db *gorm.DB) {
-	db.AutoMigrate(&entities.User{})
+	db.AutoMigrate(&entity.User{})
 }
 
 func seeding(db *gorm.DB) {
-	db.Create(&entities.User{Username: "admin", Password: "admin"})
+	db.Create(&entity.User{Username: "admin", Password: "admin"})
 }
