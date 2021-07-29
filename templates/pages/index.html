@@ -9,11 +9,14 @@
 {{define "content"}}
     <div class="container">
         <h1>Hello, {{.name}}!</h1>
+
+        <div id="app"></div>
     </div>
 {{end}}
 
 {{define "scripts"}}
-<script>
-    console.log("Script inheritance section")
+<script type="module" src="./assets/app/index.js">
+    // import App from "./assets/app/index.js";
+    // Vue.createApp(App).mount("#app");
 </script>
 {{end}}
