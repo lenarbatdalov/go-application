@@ -1,0 +1,12 @@
+{{define "login"}}
+    {{template "layout/main" .}}
+
+<div class="container" id="app"></div>
+
+<script type="module">
+    import {loginComponent} from "./assets/app/auth/login.js";
+    Vue.createApp(loginComponent("{{.error}}")).mount("#app");
+</script>
+</body>
+</html>
+{{end}}

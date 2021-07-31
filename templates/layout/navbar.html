@@ -15,19 +15,23 @@
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link active" aria-current="page" href="/">Home</a>
                 </li>
             </ul>
         </div>
 
         <div class="d-flex">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                {{ if .login }}
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Login</a>
+                    <a class="nav-link active" aria-current="page" href="/login">Login</a>
                 </li>
+                {{ end }}
+                {{ if .logout }}
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Logout</a>
+                    <a class="nav-link" href="/logout">Logout</a>
                 </li>
+                {{ end }}
             </ul>
         </div>
     </div>
