@@ -9,7 +9,7 @@ import (
 )
 
 func defineDatabase() {
-	fileName := "database/database.sqlite"
+	fileName := "database.sqlite"
 	_, err := os.Stat(fileName)
 	if os.IsNotExist(err) {
 		file, err := os.Create(fileName)
@@ -31,7 +31,7 @@ func seeding(db *gorm.DB) {
 func InitConnect() *gorm.DB {
 	defineDatabase()
 
-	db, err := gorm.Open(sqlite.Open("database/database.sqlite"), &gorm.Config{})
+	db, err := gorm.Open(sqlite.Open("database.sqlite"), &gorm.Config{})
 	if err != nil {
 		panic("failed to connect database")
 	}
