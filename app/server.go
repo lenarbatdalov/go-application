@@ -1,6 +1,8 @@
 package app
 
 import (
+	"github.com/gin-contrib/sessions"
+	"github.com/gin-contrib/sessions/cookie"
 	"github.com/gin-gonic/gin"
 	"github.com/lenarbatdalov/go-application/controller"
 )
@@ -17,6 +19,9 @@ func NewServer(loginController controller.LoginController) *Server {
 
 func (s *Server) Run() {
 	r := gin.New()
+
+	store := cookie.NewStore([]byte("secret"))
+	r.Use(sessions.Sessions("mysession", store))
 
 	r.LoadHTMLGlob("templates/**/*.html")
 	r.Static("/assets", "./assets")
