@@ -9,7 +9,7 @@ type UserRepository interface {
 	// Save(user entity.User)
 	// Update(user entity.User)
 	// Delete(user entity.User)
-	FindUser(name string) entity.User
+	FindUser(username string, password string) entity.User
 	// FindAll() []entity.User
 }
 
@@ -23,9 +23,9 @@ func NewUserRepository(db *gorm.DB) UserRepository {
 	}
 }
 
-func (ur *userRepository) FindUser(name string) entity.User {
+func (ur *userRepository) FindUser(username string, password string) entity.User {
 	var user entity.User
-	ur.connection.Set("gorm:auto_preload", true).First(&user, "username = ?", name)
+	ur.connection.Where("username = ? AND password = ?", username, password).First(&user)
 	// fmt.Println(user)
 	return user
 }

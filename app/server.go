@@ -31,7 +31,7 @@ func (s *Server) Run() {
 		auth.GET("/", controller.DefaultController)
 		auth.GET("/login", s.loginController.LoginPage)
 		auth.POST("/login", s.loginController.Login)
-		// auth.GET("/logout")
+		auth.GET("/logout", s.loginController.Logout)
 	}
 
 	err := r.Run(":8080")

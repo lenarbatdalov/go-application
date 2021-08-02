@@ -3,6 +3,7 @@ package controller
 import (
 	"net/http"
 
+	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
 	"github.com/lenarbatdalov/go-application/service"
 )
@@ -10,6 +11,7 @@ import (
 type LoginController interface {
 	LoginPage(ctx *gin.Context)
 	Login(ctx *gin.Context)
+	Logout(ctx *gin.Context)
 }
 
 type loginController struct {
@@ -33,8 +35,18 @@ func (lс *loginController) Login(ctx *gin.Context) {
 
 	check := lс.loginService.FindUser(username, password)
 	if check {
+		session := sessions.Default(ctx)
+		session.Set("user", true)
+		session.Save()
 		ctx.Redirect(http.StatusFound, "/")
 	} else {
-		ctx.HTML(http.StatusOK, "login", gin.H{"title": "Login Page", "err": "Не верно введен логин или пароль."})
+		ctx.HTML(http.StatusOK, "login", gin.H{"title": "Login Page", "error": "Не верно введен логин или пароль."})
 	}
+}
+
+func (lс *loginController) Logout(ctx *gin.Context) {
+	session := sessions.Default(ctx)
+	session.Clear()
+	session.Save()
+	ctx.Redirect(http.StatusFound, "/")
 }

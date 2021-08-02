@@ -1,6 +1,8 @@
 package service
 
-import "github.com/lenarbatdalov/go-application/repository"
+import (
+	"github.com/lenarbatdalov/go-application/repository"
+)
 
 type LoginService interface {
 	FindUser(username string, password string) bool
@@ -17,5 +19,6 @@ func NewLoginService(ur repository.UserRepository) LoginService {
 }
 
 func (ls *loginService) FindUser(username string, password string) bool {
-	return true
+	user := ls.userRepository.FindUser(username, password)
+	return user.ID != 0
 }
