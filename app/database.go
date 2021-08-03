@@ -22,10 +22,12 @@ func defineDatabase() {
 
 func migration(db *gorm.DB) {
 	db.AutoMigrate(&entity.User{})
+	db.AutoMigrate(&entity.Key{})
 }
 
 func seeding(db *gorm.DB) {
-	db.Create(&entity.User{Username: "admin", Password: "admin"})
+	entity.CreateUserSeed(db)
+	// db.Create(&entity.Key{Login: "admin", Password: "admin"})
 }
 
 func InitConnect() *gorm.DB {
