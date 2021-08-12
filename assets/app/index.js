@@ -1,72 +1,40 @@
-import todoItem from "./todo-item.js";
+import navbar from "./components/NavbarComponent.js";
 
-let App = {
-    data() {
-        return {
-            counter: 0,
-            message: 'Привет, Vue.js!',
-            seen: true,
-            todos: [
-                { text: 'Learn JavaScript' },
-                { text: 'Learn Vue' },
-                { text: 'Build something awesome' }
-            ]
-        }
-    },
+const template = `
+<div>
+    <navbar :auth="false"></navbar>
+    <div class="container">
+        <br>
+        <p>
+            <router-link to="/">Go to Home</router-link>
+            <br>
+            <router-link class="nav-link active" aria-current="page" to="/about">Go to About</router-link>
+        </p>
+        <br><hr><br>
+        <router-view></router-view>
+    </div>
+</div>
+`
 
-    mounted() {
-        setInterval(() => {
-            this.counter++;
-        }, 1000)
-    },
+const Home = { template: '<div>Home</div>' };
+const About = { template: '<div>About</div>' };
 
+const routes = [
+    { path: '/', component: Home },
+    { path: '/about', component: About },
+];
+
+const router = VueRouter.createRouter({
+    history: VueRouter.createWebHashHistory(),
+    routes,
+});
+
+Vue.createApp({
     components: {
-        "todo-item": todoItem
+        "navbar": navbar
     },
-
-    methods: {
-        reverseMessage() {
-            this.seen = !this.seen;
-            this.message = this.message.split('').reverse().join('');
-        }
-    },
-
-    template: `
-        <div>
-            <div>Счётчик: {{ counter }}</div>
-
-            <hr>
-
-            <div>
-                <p>{{ message }}</p>
-                <button v-on:click="reverseMessage">Перевернуть сообщение</button>
-            </div>
-
-            <hr>
-
-            <div>
-                <span v-if="seen">Сейчас меня видно</span>
-            </div>
-
-            <hr>
-
-            <div>
-                <ol>
-                    <li v-for="todo in todos">
-                    {{ todo.text }}
-                    </li>
-                </ol>
-            </div>
-
-            <hr>
-
-            <todo-item
-                v-for="(todo, item) in todos"
-                :todo="todo.text"
-                :key="item"
-            ></todo-item>
-        </div>
-    `
-};
-
-Vue.createApp(App).mount("#app");
+    template: template
+})
+    .use(router)
+    .mount("#app")
+;

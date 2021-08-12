@@ -1,14 +1,9 @@
 {{define "index"}}
     {{template "layout/main" .}}
 
-<div class="container">
-    <h1>Index Page.</h1>
-</div>
+<div id="app"></div>
+<script type="module" src="./assets/app/index.js"></script>
 
-<div class="container" id="app"></div>
-
-<script type="module" src="./assets/app/index.js">
-</script>
 </body>
 </html>
 {{end}}

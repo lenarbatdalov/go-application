@@ -1,9 +1,8 @@
-{{ define "navbar" }}
+const template = `
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
     <div class="container-fluid">
-        <span class="navbar-brand" href="#">My site</span>
-        <!-- <a class="navbar-brand" href="#">My site</a> -->
-        <button 
+        <a class="navbar-brand" href="/">My site</a>
+        <button
             class="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
@@ -16,25 +15,28 @@
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+                <router-link class="nav-link active" aria-current="page" to="/about">About</router-link>
                 </li>
             </ul>
         </div>
 
         <div class="d-flex">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                {{ if .login }}
-                <li class="nav-item">
+                <li v-if="!auth" class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/login">Login</a>
                 </li>
-                {{ end }}
-                {{ if .logout }}
-                <li class="nav-item">
+                <li v-if="auth" class="nav-item">
                     <a class="nav-link" href="/logout">Logout</a>
                 </li>
-                {{ end }}
             </ul>
         </div>
     </div>
 </nav>
-{{ end }}
+`;
+
+export default {
+    props: {
+        auth: Boolean
+    },
+    template: template
+};

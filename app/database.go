@@ -23,6 +23,10 @@ func defineDatabase() {
 func migration(db *gorm.DB) {
 	db.AutoMigrate(&entity.User{})
 	db.AutoMigrate(&entity.Key{})
+	db.AutoMigrate(&entity.Account{})
+	db.AutoMigrate(&entity.Category{})
+	db.AutoMigrate(&entity.Expense{})
+	db.AutoMigrate(&entity.Income{})
 }
 
 func seeding(db *gorm.DB) {
